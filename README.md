@@ -89,6 +89,13 @@ PDF Report Generation
 
 ---
 
+## Screenshots
+
+**Homepage**
+![Homepage](assets/homepage.png)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
