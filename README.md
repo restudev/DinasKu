@@ -90,4 +90,4 @@ This project was built during an internship at a regional government office. The
 
 ## Author
 
-**Restu** · [GitHub](https://github.com/username)
+**Restu** · [GitHub](https://github.com/restudev)
