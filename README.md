@@ -32,8 +32,7 @@ DinasKu is a web-based system that digitizes the government travel document work
 ├── e-sppd-ai/        # Python OCR service
 ├── e-sppd-api/       # Laravel REST API
 ├── frontend/         # React TypeScript client
-├── .env              # Environment config (not included)
-└── sql_supabase      # Database schema
+└── .env              # Environment config (not included)
 ```
 
 ---
