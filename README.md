@@ -1,6 +1,52 @@
-# DinasKu: e-SPPD Digitalization System
+# DinasKu: Digital Official Travel Management System
 
-DinasKu is a web-based system that digitizes the government travel document workflow (SPPD) for a regional office in Indonesia. Built to replace a fully manual, paper-based process, the system handles document generation, OCR-based data extraction, digital signature collection, and travel reimbursement calculation in one integrated platform.
+DinasKu is a web-based system built to digitalize and streamline the administration and verification process of government business trips (Surat Perjalanan Dinas/SPD). The system replaces a fully manual workflow by integrating QR code verification, GPS validation, photo documentation, AI-based person detection, digital signatures, and automated PDF report generation into one platform.
+
+---
+
+## Problem
+
+Government business trip documents are commonly managed manually, which leads to error-prone validation, difficulty tracking employee attendance at destination locations, lack of real-time verification, and time-consuming report generation. DinasKu addresses these issues through a structured digital verification workflow.
+
+---
+
+## Key Features
+
+**Document Management**
+- Upload and store SPD documents
+- Document tracking and monitoring
+
+**QR-Based Checkpoint Verification**
+- Generate unique QR codes per checkpoint
+- Token-based validation on scan
+
+**Location and Photo Validation**
+- Automatic GPS coordinate capture during checkpoint verification
+- Field photo upload as proof of attendance
+
+**AI Person Detection**
+- Detect and count people in uploaded photos using YOLOv8
+- Supports verification of reported participant numbers
+
+**Digital Signature and Stamp**
+- Signature canvas for digital signing
+- Official stamp upload and validation
+
+**Automated PDF Generation**
+- Generate official verification reports
+- Merge checkpoint data, signatures, stamps, and photos into final SPD document
+
+---
+
+## System Workflow
+
+1. Admin uploads SPD document
+2. QR codes are generated for each checkpoint
+3. Employee scans QR code at destination
+4. GPS coordinates and field photo are recorded
+5. AI detects and counts people in the photo
+6. Employee signs digitally and uploads official stamp
+7. System generates final verification PDF automatically
 
 ---
 
@@ -8,28 +54,34 @@ DinasKu is a web-based system that digitizes the government travel document work
 
 | Layer | Technology |
 |---|---|
-| Frontend | React, TypeScript, Tailwind CSS |
-| Backend | Laravel, PHP |
-| AI / OCR | Python, Tesseract OCR |
-| Database | Supabase (PostgreSQL) |
-| Storage | Supabase Storage |
+| Frontend | React, TypeScript, Vite |
+| Backend | Laravel 12, REST API, FPDI, DomPDF |
+| Database | PostgreSQL, Supabase Storage |
+| AI | Python, YOLOv8, OpenCV |
+| Other | QR Code Generator, Geolocation API, HTML5 Camera |
 
 ---
 
-## Features
+## Architecture
 
-- Upload and parse SPD documents using OCR
-- Auto-fill travel document fields from extracted data
-- Digital checkpoint signature collection
-- Automatic reimbursement calculation based on travel data
-- Document export to PDF and DOCX
+```
+Frontend (React + TypeScript)
+        ↓
+Laravel REST API
+        ↓
+PostgreSQL + Supabase Storage
+        ↓
+Python AI Service (YOLOv8)
+        ↓
+PDF Report Generation
+```
 
 ---
 
 ## Project Structure
 
 ```
-├── e-sppd-ai/        # Python OCR service
+├── e-sppd-ai/        # Python AI service (YOLOv8)
 ├── e-sppd-api/       # Laravel REST API
 ├── frontend/         # React TypeScript client
 └── .env              # Environment config (not included)
@@ -64,7 +116,7 @@ cp .env.example .env
 php artisan key:generate
 php artisan serve
 
-# AI / OCR Service
+# AI Service
 cd e-sppd-ai
 pip install -r requirements.txt
 python main.py
@@ -81,12 +133,12 @@ SUPABASE_KEY=
 
 ---
 
-## Background
+## Status
 
-This project was built during an internship at a regional government office. The existing process required staff to manually fill, print, sign, and archive travel documents for every official trip — a process prone to errors and delays. DinasKu was developed to streamline this end-to-end, reducing document processing time significantly.
+Completed as a digital transformation project for official government travel document verification and monitoring. Core features including QR verification, GPS validation, AI person detection, digital signatures, and automated PDF generation are fully implemented.
 
 ---
 
 ## Author
 
-**Restu** · [GitHub](https://github.com/restudev)
+**Restu Lestari** · [GitHub](https://github.com/restudev)
