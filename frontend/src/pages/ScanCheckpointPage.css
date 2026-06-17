@@ -1,0 +1,545 @@
+/* ==========================================================
+   TOKENS
+========================================================== */
+:root {
+  --bg:            #f1f5f9;
+  --surface:       #ffffff;
+  --surface-alt:   #f8fafc;
+
+  --border:        #e2e8f0;
+  --border-focus:  #dc2626;
+
+  --primary:       #dc2626;
+  --primary-h:     #b91c1c;
+  --primary-bg:    #fef2f2;
+  --primary-light: #fee2e2;
+
+  --success:       #16a34a;
+  --success-bg:    #dcfce7;
+
+  --text:          #0f172a;
+  --text-sub:      #64748b;
+  --text-muted:    #94a3b8;
+
+  --r-card:        14px;
+  --r-input:       10px;
+  --r-btn:         10px;
+
+  --shadow:        0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+  --shadow-sm:     0 1px 2px rgba(0,0,0,.04);
+
+  --font: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { width: 100%; height: 100%; margin: 0; }
+
+/* ==========================================================
+   PAGE
+========================================================== */
+.scp-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 24px;
+  font-family: var(--font);
+  color: var(--text);
+}
+
+.scp-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.scp-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-sub);
+  font-size: 15px;
+}
+
+/* ==========================================================
+   TOPBAR
+========================================================== */
+.scp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.scp-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scp-topbar-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.scp-topbar-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: var(--primary-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.scp-topbar-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  text-align: left;
+}
+
+.scp-topbar-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.4;
+  margin: 0;
+  text-align: left;
+}
+
+/* Status chip */
+.scp-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.scp-status-chip--active {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.scp-status-chip--done {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.scp-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+.scp-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 16px;
+  align-items: stretch; /* both cols grow to the same height */
+}
+
+/* Right column: single camera card fills the full column height */
+.scp-col--right {
+  height: 100%;
+}
+
+.scp-col--right .scp-card--camera {
+  height: 100%;
+}
+
+@media (max-width: 1100px) {
+  .scp-cols { grid-template-columns: minmax(0,1fr) 380px; }
+}
+@media (max-width: 900px) {
+  .scp-cols { grid-template-columns: 1fr; }
+}
+
+.scp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%; /* fill the grid row */
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+.scp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.scp-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* ==========================================================
+   META (lokasi info)
+========================================================== */
+.scp-meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.scp-meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.scp-meta-item:last-child { border-bottom: none; }
+
+.scp-meta-key {
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.scp-meta-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  max-width: 60%;
+}
+
+/* ==========================================================
+   FIELDS
+========================================================== */
+.scp-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scp-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.scp-field { display: flex; flex-direction: column; gap: 5px; }
+
+.scp-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-sub);
+  text-align: left;
+}
+
+.scp-input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.scp-input::placeholder { color: var(--text-muted); }
+
+.scp-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.1);
+}
+
+/* ==========================================================
+   MAP — card is flex:1, inner wrap fills the rest
+========================================================== */
+.scp-card--map {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px; /* same as card padding */
+  overflow: hidden;
+}
+
+.scp-map-wrap {
+  flex: 1;
+  min-height: 160px;
+  position: relative;
+  border-radius: var(--r-card);  /* full radius since it has padding around it now */
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.scp-map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.scp-map-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15,23,42,.7);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   CAMERA CARD
+========================================================== */
+.scp-card--camera {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scp-cam-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Toggle */
+.scp-toggle {
+  display: flex;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.scp-toggle-btn {
+  border: none;
+  background: transparent;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.scp-toggle-btn.active {
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+
+/* ==========================================================
+   VIEWFINDER — grows to fill card, actions pinned to bottom
+========================================================== */
+.scp-viewfinder {
+  position: relative;
+  flex: 1;           /* fill leftover height in camera card */
+  min-height: 220px; /* floor so it never collapses */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f172a;
+  border: 1px solid var(--border);
+}
+
+.scp-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Corner guides */
+.scp-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: rgba(255,255,255,.7);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.scp-corner--tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+.scp-corner--tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; border-radius: 0 3px 0 0; }
+.scp-corner--bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; border-radius: 0 0 0 3px; }
+.scp-corner--br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
+
+/* ==========================================================
+   DETECTION BAR
+========================================================== */
+.scp-detect-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.scp-detect-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scp-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.scp-pulse.active {
+  background: var(--primary);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.3); }
+}
+
+.scp-detect-label {
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.scp-detect-right {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.scp-count {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.scp-count-unit {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+.scp-actions {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.scp-btn-secondary,
+.scp-btn-primary {
+  flex: 1;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: var(--r-btn);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  transition: background .15s, opacity .15s;
+}
+
+.scp-btn-secondary {
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+}
+
+.scp-btn-secondary:hover { background: #e2e8f0; }
+
+.scp-btn-primary {
+  background: var(--primary);
+  color: #fff;
+  flex: 2;
+}
+
+.scp-btn-primary:hover:not(:disabled) { background: var(--primary-h); }
+
+.scp-btn-primary:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ==========================================================
+   SPINNER
+========================================================== */
+.scp-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(220,38,38,.25);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: inline-block;
+}
+
+.scp-spinner--sm {
+  width: 15px;
+  height: 15px;
+  border-color: rgba(255,255,255,.35);
+  border-top-color: #fff;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+@media (max-width: 768px) {
+  .scp-page { padding: 12px 14px; }
+
+  .scp-topbar-title { font-size: 16px; }
+  .scp-topbar-sub { display: none; }
+
+  .scp-field-row { grid-template-columns: 1fr; }
+
+  .scp-actions { flex-direction: column; }
+  .scp-btn-primary { flex: none; height: 52px; font-size: 15px; }
+  .scp-btn-secondary { flex: none; }
+}

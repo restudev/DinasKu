@@ -1,0 +1,9 @@
+{
+    "require": {
+        "laravel/sanctum": "^4.3",
+        "spatie/laravel-permission": "^6.25",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "intervention/image": "^3.11"
+    }
+}

@@ -1,0 +1,1404 @@
+/* ==========================================================
+   DESIGN TOKENS — tema merah
+========================================================== */
+:root {
+  --bg:          #f5f5f5;
+  --surface:     #ffffff;
+  --surface-alt: #fafafa;
+  --border:      #e5e5e5;
+
+  --primary:     #B71C1C;
+  --primary-2:   #D32F2F;
+  --primary-h:   #8B0000;
+  --primary-bg:  #fef2f2;
+  --primary-light: #fee2e2;
+
+  --success:     #2E7D32;
+  --success-bg:  #E8F5E9;
+  --success-bdr: #bbf7d0;
+
+  --text:        #212121;
+  --text-sub:    #6b7280;
+  --text-muted:  #9ca3af;
+
+  --radius:      14px;
+  --radius-sm:   10px;
+  --radius-btn:  10px;
+
+  --shadow:    0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ==========================================================
+   PAGE
+========================================================== */
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 24px 40px;
+  font-family: var(--font);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.center-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-sub);
+  font-family: var(--font);
+}
+
+/* ==========================================================
+   TOPBAR
+========================================================== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.topbar-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.topbar-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+/* Chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chip-active { background: var(--primary-bg); color: var(--primary); }
+.chip-done   { background: var(--success-bg); color: var(--success); }
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   STEP BAR
+========================================================== */
+.stepbar {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stepbar-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: 1;
+}
+
+.stepbar-item:last-child { flex: 0 0 auto; }
+
+.stepbar-node {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+.stepbar-node.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.stepbar-node.done {
+  background: var(--success-bg);
+  border-color: var(--success-bdr);
+  color: var(--success);
+}
+
+.stepbar-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.stepbar-label.active { color: var(--text); font-weight: 600; }
+
+.stepbar-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin: 0 8px;
+}
+
+.stepbar-line.done { background: #86efac; }
+
+/* ==========================================================
+   STEP LAYOUT — base two-column grid
+========================================================== */
+.step-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* navbar always spans full width */
+.step-layout > .navbar {
+  grid-column: 1 / -1;
+}
+
+/* single-column variant for steps 4 */
+.step-layout--single {
+  grid-template-columns: 1fr;
+  max-width: 700px;
+}
+
+/* Step 3 review: both columns stretch to same height */
+.step-layout--review {
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: stretch;
+}
+
+.step-layout--review > .col,
+.step-layout--review > .col-cam {
+  align-self: stretch;
+}
+
+/* left / right columns */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+/* Right camera column: stretch full height of the grid row */
+.col-cam {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-self: stretch;
+  height: 100%;
+}
+
+/* Step 3 specific column helpers */
+.review-col-left,
+.review-col-right {
+  display: flex;
+  flex-direction: column;
+}
+
+  .col-cam { align-self: auto; }
+  .step-layout--review { align-items: start; }
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* Camera card stretches to fill its column */
+.card-cam {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+}
+
+.card-map {
+  flex: 1;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 28px;
+  border-color: var(--success-bdr);
+  background: var(--success-bg);
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+/* ==========================================================
+   META LIST
+========================================================== */
+.meta-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-row:last-child  { border-bottom: none; padding-bottom: 0; }
+.meta-row:first-child { padding-top: 0; }
+
+.meta-row dt {
+  font-size: 14px;
+  color: var(--text-sub);
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+.meta-row dd {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+}
+
+.mono {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   FORM FIELDS
+========================================================== */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-sub);
+  text-align: left;
+}
+
+.required { color: var(--primary); margin-left: 2px; }
+
+.input {
+  height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+  text-align: left;
+}
+
+.input::placeholder { color: var(--text-muted); }
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.1);
+}
+
+/* ==========================================================
+   MAP
+========================================================== */
+.map-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 160px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+.map-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17,24,39,.72);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   CAMERA CARD INTERNALS
+========================================================== */
+.cam-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-group {
+  display: flex;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-sub);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.toggle-btn.active {
+  background: var(--surface);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.viewfinder {
+  position: relative;
+  flex: 1;
+  min-height: 260px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid var(--border);
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(255,255,255,.65);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.corner.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+.corner.tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; border-radius: 0 3px 0 0; }
+.corner.bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; border-radius: 0 0 0 3px; }
+.corner.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
+
+/* ==========================================================
+   DETECT BAR
+========================================================== */
+.detect-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 14px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.detect-left { display: flex; align-items: center; gap: 8px; }
+.detect-label { font-size: 13px; color: var(--text-sub); }
+
+.pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.pulse.active {
+  background: var(--primary);
+  animation: pulse-anim 1s infinite;
+}
+
+@keyframes pulse-anim {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.5; transform:scale(1.35); }
+}
+
+.count-num  { font-size: 22px; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
+.count-unit { font-size: 13px; color: var(--text-muted); }
+
+/* ==========================================================
+   CAM ACTIONS
+========================================================== */
+.cam-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+.cam-actions .btn {
+  width: 100%;
+  height: 46px;
+}
+
+/* ==========================================================
+   SIGNATURE
+========================================================== */
+.sig-wrap {
+  position: relative;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 4px;
+}
+
+.sig-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--text-muted);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   UPLOAD ZONE
+========================================================== */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px 16px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  cursor: pointer;
+  color: var(--text-sub);
+  transition: border-color .15s, background .15s, color .15s;
+  text-align: center;
+}
+
+.upload-zone:hover {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.upload-input { display: none; }
+.upload-label { font-size: 13px; font-weight: 600; }
+.upload-sub   { font-size: 11px; color: var(--text-muted); }
+
+/* ==========================================================
+   STAMP
+========================================================== */
+.stamp-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.stamp-img {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* ==========================================================
+   RESULT / SUCCESS
+========================================================== */
+.success-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-title { font-size: 15px; font-weight: 700; color: var(--success); }
+.success-sub   { font-size: 13px; color: var(--text-sub); }
+
+.pdf-preview {
+  width: 100%;
+  height: 480px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  transition: background .15s, opacity .15s, transform .1s;
+  white-space: nowrap;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(183, 28, 28, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) { opacity: .92; }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; box-shadow: none; }
+
+.btn-ghost {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+}
+
+.btn-ghost:hover:not(:disabled) { background: #ebebeb; }
+.btn-ghost:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-full { width: 100%; }
+
+/* ==========================================================
+   NAVBAR (next / back)
+========================================================== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar .btn-primary,
+.navbar .btn-ghost {
+  min-width: 160px;
+}
+
+/* When only the primary button is present (no back), push it to the right */
+.navbar .btn-primary:only-child {
+  margin-left: auto;
+}
+
+/* ==========================================================
+   SPINNER
+========================================================== */
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(220,38,38,.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.spinner-sm {
+  width: 13px; height: 13px;
+  border-color: rgba(255,255,255,.3);
+  border-top-color: #fff;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+  .topbar-sub { display: none; }
+  .stepbar-label { display: none; }
+  .step-layout--single { max-width: 100%; }
+  .navbar .btn-primary { height: 42px; font-size: 14px; }
+
+  
+/* ==========================================================
+   STEP 2 — SIGN LAYOUT
+========================================================== */
+.card-sign {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.sig-wrap--tall {
+  flex: 1;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sig-wrap--tall canvas {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 320px;
+  display: block;
+}
+
+.sign-actions {
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+.card-stamp {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+}
+
+.upload-zone--full {
+  flex: 1;
+  min-height: 320px;
+  padding: 0;
+}
+
+.stamp-preview--full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  min-height: 320px;
+}
+
+.stamp-img--full {
+  max-width: 220px;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+/* ==========================================================
+   SIGNATURE MODE TABS
+========================================================== */
+.sig-mode-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.sig-mode-tab {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.sig-mode-tab.active {
+  background: var(--primary-bg);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ==========================================================
+   STEP 3 — REVIEW LAYOUT
+   Tujuan: dua kolom setinggi konten, tidak ada ruang kosong.
+   Kiri  : card full-height — meta list + foto mengisi sisa
+   Kanan : card full-height — TTD (fixed) + Stempel (fixed)
+           + PDF iframe (flex-grow, mengisi semua sisa ruang)
+========================================================== */
+
+/* Kartu kiri — full height, flex column */
+.card-review-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;          /* isi penuh kolom */
+}
+
+/* Foto section di dalam kartu kiri, tumbuh mengisi sisa ruang */
+.review-foto-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;               /* sisa ruang setelah meta list */
+  min-height: 160px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.review-foto-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+/* Wrapper foto — mengisi sisa tinggi section */
+.review-foto-thumb-wrap {
+  flex: 1;
+  min-height: 120px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+}
+
+.review-foto-thumb-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity .15s;
+}
+
+.review-foto-thumb-fill:hover { opacity: .88; }
+
+/* Kartu kanan — full height, flex column */
+.card-review-right {
+  display: flex;
+  flex-direction: column;
+  height: 100%;          /* isi penuh kolom */
+}
+
+/* Individual review block */
+.review-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;        /* TTD & Stempel tidak meregang */
+}
+
+/* Block yang boleh tumbuh (PDF) */
+.review-block--grow {
+  flex: 1;               /* ambil semua sisa tinggi */
+  min-height: 0;
+}
+
+.review-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.review-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 14px 0;
+  flex-shrink: 0;
+}
+
+/* Signature preview box */
+.review-sig-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  cursor: zoom-in;
+  transition: border-color .15s;
+  flex-shrink: 0;
+}
+
+.review-sig-box:hover { border-color: var(--primary); }
+
+.review-sig {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  max-height: 120px;     /* TTD lebih compact agar PDF dapat ruang */
+}
+
+/* Stamp preview box */
+.review-stamp-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  cursor: zoom-in;
+  transition: border-color .15s;
+  flex-shrink: 0;
+}
+
+.review-stamp-box:hover { border-color: var(--primary); }
+
+.review-stamp-img {
+  max-width: 110px;      /* Sedikit dikecilkan agar PDF dapat lebih banyak ruang */
+  max-height: 110px;
+  object-fit: contain;
+  display: block;
+}
+
+/* PDF iframe — mengisi semua sisa tinggi di kartu kanan */
+.review-pdf-frame--grow {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+/* Placeholder saat tidak ada PDF */
+.review-pdf-empty {
+  flex: 1;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--surface-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.review-pdf-empty-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+.review-pdf-empty-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+/* Icon-only button */
+.btn-icon-only {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-alt);
+  color: var(--text-sub);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.btn-icon-only:hover {
+  background: var(--primary-bg);
+  color: var(--primary);
+  border-color: var(--primary-light);
+}
+
+/* ==========================================================
+   LIGHTBOX
+========================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+  backdrop-filter: blur(3px);
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,.22); }
+
+/* ==========================================================
+   STEP 4 — RESULT LAYOUT
+   Konsisten dengan Step 3: dua kolom, sama tinggi.
+   Kiri  : status sukses (fixed) + info checkpoint (fixed)
+   Kanan : PDF preview mengisi penuh
+========================================================== */
+.step-layout--result {
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: stretch;
+}
+
+/* card-result-pdf di kolom kiri harus stretch penuh */
+.result-col-left {
+  align-self: stretch;
+}
+
+.step-layout--result > .col,
+.step-layout--result > .col-cam {
+  align-self: stretch;
+}
+
+.result-col-left,
+.result-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Kartu PDF kanan — stretch penuh, flex column */
+.card-result-pdf {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+}
+
+/* iframe PDF mengisi semua sisa ruang di kartu */
+.result-pdf-frame {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: block;
+  margin-top: 10px;
+}
+
+/* ==========================================================
+   RESPONSIVE — MOBILE & TABLET
+   Breakpoints:
+     ≤ 960px  : tablet landscape → collapse dua kolom
+     ≤ 640px  : tablet portrait / HP besar
+     ≤ 480px  : HP standar
+     ≤ 380px  : HP kecil
+========================================================== */
+
+/* ── 960px: Tablet landscape — semua layout jadi satu kolom ── */
+@media (max-width: 960px) {
+  /* semua step-layout jadi 1 kolom */
+  .step-layout,
+  .step-layout--review,
+  .step-layout--result {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .col-cam { align-self: auto; }
+
+  /* kolom review & result tidak stretch di mobile */
+  .step-layout--review > .col,
+  .step-layout--review > .col-cam,
+  .step-layout--result  > .col,
+  .step-layout--result  > .col-cam {
+    align-self: auto;
+  }
+
+  /* Step 4: kolom kanan (sukses+info) naik ke atas, PDF ke bawah */
+  .step-layout--result { display: flex; flex-direction: column; }
+  .result-col-right { order: -1; }   /* sukses + info → tampil pertama */
+  .result-col-left  { order:  0; }   /* PDF → tampil kedua */
+  /* navbar tetap di bawah */
+  .step-layout--result > .navbar { order: 1; }
+
+  /* semua kolom tidak boleh overflow */
+  .col, .col-cam,
+  .review-col-left, .review-col-right,
+  .result-col-left, .result-col-right { min-width: 0; width: 100%; }
+
+  /* card tidak boleh overflow */
+  .card { min-width: 0; word-break: break-word; }
+
+  /* meta-row nilai tidak overflow */
+  .meta-row dd { max-width: 60%; word-break: break-word; text-align: right; }
+
+  /* tombol download full width */
+  .card-result-pdf .btn-full { width: 100%; }
+
+  /* card-cam viewfinder: tinggi terbatas di tablet */
+  .viewfinder { min-height: 260px; }
+
+  /* PDF frame: tinggi fixed di mobile (tidak infinite stretch) */
+  .review-pdf-frame--grow,
+  .result-pdf-frame {
+    flex: none;
+    height: 420px;
+    min-height: 0;
+  }
+
+  /* card review: lepas height:100% karena 1 kolom */
+  .card-review-left,
+  .card-review-right,
+  .card-result-pdf {
+    height: auto;
+    flex: none;
+  }
+
+  /* review-foto-section: tinggi fixed */
+  .review-foto-section {
+    min-height: 240px;
+    flex: none;
+  }
+
+  .review-foto-thumb-wrap {
+    height: 220px;
+    flex: none;
+  }
+
+  /* TTD + Stempel: lepas dari flex-grow */
+  .review-block--grow {
+    flex: none;
+  }
+}
+
+/* ── 640px: HP besar / tablet portrait ── */
+@media (max-width: 640px) {
+  .page { padding: 10px 10px 40px; }
+
+  /* topbar */
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .topbar-sub { display: none; }
+  .topbar-title { font-size: 14px; }
+  .topbar-icon { width: 32px; height: 32px; }
+
+  /* stepbar: sembunyikan label, tampilkan node saja */
+  .stepbar { padding: 10px 12px; }
+  .stepbar-label { display: none; }
+  .stepbar-node { width: 22px; height: 22px; min-width: 22px; font-size: 10px; }
+
+  /* navbar */
+  .navbar { padding: 10px 12px; }
+  .navbar .btn { height: 42px; font-size: 14px; }
+  .navbar .btn-primary { height: 42px; font-size: 14px; }
+
+  /* card */
+  .card { padding: 14px 12px; }
+
+  /* field grid: 1 kolom */
+  .field-grid { grid-template-columns: 1fr; }
+
+  /* viewfinder */
+  .viewfinder { min-height: 240px; }
+
+  /* signature canvas */
+  .sig-wrap--tall { min-height: 240px; }
+  .sig-wrap--tall canvas { min-height: 220px; }
+
+  /* upload zone stempel */
+  .upload-zone--full { min-height: 220px; }
+  .stamp-preview--full { min-height: 220px; }
+
+  /* review: sign row */
+  .review-sign-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* review sig & stamp: lebih kecil */
+  .review-sig-box,
+  .review-stamp-box { height: 110px; }
+  .review-sig,
+  .review-stamp-img { max-height: 80px; }
+
+  /* PDF frame di mobile */
+  .review-pdf-frame--grow,
+  .result-pdf-frame { height: 360px; }
+
+  /* foto thumb */
+  .review-foto-thumb-wrap { height: 200px; flex: none; }
+  .review-foto-section { min-height: 220px; flex: none; }
+
+  /* result: success card */
+  .card-success { padding: 20px 16px; }
+  .success-icon { width: 40px; height: 40px; }
+  .success-title { font-size: 14px; }
+  .success-sub { font-size: 12px; }
+
+  /* pdf-preview step 4 */
+  .pdf-preview { height: 360px; }
+}
+
+/* ── 480px: HP standar ── */
+@media (max-width: 480px) {
+  .page { padding: 8px 8px 36px; }
+
+  .topbar { padding: 8px 10px; }
+  .topbar-icon { display: none; }
+
+  /* stepbar: lebih compact */
+  .stepbar { padding: 8px 10px; gap: 4px; }
+  .stepbar-line { margin: 0 4px; }
+
+  /* wrap lebih sempit */
+  .card { padding: 12px 10px; }
+
+  /* meta row teks lebih kecil */
+  .meta-row dt,
+  .meta-row dd { font-size: 12px; }
+
+  /* input lebih compact */
+  .input { height: 36px; font-size: 12px; }
+
+  /* navbar btn full width di HP kecil */
+  .navbar { flex-direction: column; gap: 8px; }
+  .navbar .btn { width: 100%; justify-content: center; }
+
+  /* viewfinder */
+  .viewfinder { min-height: 200px; }
+
+  /* signature */
+  .sig-wrap--tall { min-height: 200px; }
+
+  /* review sign row: 1 kolom di HP kecil */
+  .review-sign-row { grid-template-columns: 1fr 1fr; }
+
+  /* PDF frame */
+  .review-pdf-frame--grow,
+  .result-pdf-frame { height: 300px; }
+
+  /* foto */
+  .review-foto-thumb-wrap { height: 180px; }
+  .review-foto-section { min-height: 200px; }
+
+  /* count number */
+  .count-num { font-size: 16px; }
+
+  /* detect bar */
+  .detect-bar { padding: 7px 10px; }
+}
+
+/* ── 380px: HP kecil ── */
+@media (max-width: 380px) {
+  .page { padding: 6px 6px 32px; }
+
+  .topbar-title { font-size: 13px; }
+  .stepbar-node { width: 20px; height: 20px; min-width: 20px; font-size: 9px; }
+
+  .card { padding: 10px 8px; border-radius: 8px; }
+  .card-title { font-size: 9px; }
+
+  .meta-row dt,
+  .meta-row dd { font-size: 11px; }
+
+  .btn { height: 38px; font-size: 12px; padding: 0 12px; }
+
+  .review-sign-row { grid-template-columns: 1fr; }
+
+  .review-pdf-frame--grow,
+  .result-pdf-frame { height: 260px; }
+
+  .review-foto-thumb-wrap { height: 160px; }
+}
+
+/* ==========================================================
+   STEP 4 MOBILE — sembunyikan iframe PDF, tombol saja
+========================================================== */
+@media (max-width: 960px) {
+  /* Sembunyikan iframe PDF di mobile — browser HP tidak support embed PDF */
+  .result-pdf-frame { display: none; }
+
+  /* card-result-pdf di mobile: tidak perlu tinggi besar, cukup wrap tombol */
+  .card-result-pdf {
+    flex: none;
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Tombol download jadi lebih besar & mudah dipencet */
+  .result-pdf-btn {
+    height: 48px !important;
+    font-size: 15px !important;
+    margin-top: 0 !important;
+    border-radius: 10px !important;
+  }
+
+  /* Sembunyikan label "Preview PDF" di mobile karena iframenya hilang */
+  .card-result-pdf > .card-title { display: none; }
+
+  /* Topbar mobile: tampilkan judul tapi lebih compact */
+  .topbar-sub { display: none; }
+
+  /* Stepbar mobile: tampilkan node + label tetap */
+  .stepbar { low-x: auto; }
+  .stepbar-label { display: inline; font-size: 11px; }
+}
+
+@media (max-width: 640px) {
+  .stepbar-label { display: none; }
+
+  /* success card mobile */
+  .card-success { padding: 18px 14px; gap: 6px; }
+
+  /* result col kanan: tidak ada gap berlebih */
+  .result-col-right { gap: 8px; }
+}

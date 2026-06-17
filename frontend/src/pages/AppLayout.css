@@ -1,0 +1,31 @@
+/* ==========================================================
+   AppLayout.css
+   Mengatur margin konten agar tidak tertutup sidebar.
+========================================================== */
+
+.al-root {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Konten utama — offset kiri sesuai lebar sidebar */
+.al-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sb-width);
+  transition: margin-left .2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Saat sidebar di-collapse */
+.sb-sidebar--collapsed ~ .al-main,
+:has(.sb-sidebar--collapsed) .al-main {
+  margin-left: var(--sb-width-collapsed);
+}
+
+/* Mobile: tidak ada sidebar desktop, pakai top-bar */
+@media (max-width: 768px) {
+  .al-main {
+    margin-left: 0;
+    padding-top: var(--sb-mobile-bar);
+  }
+}

@@ -1,0 +1,1006 @@
+/* ==========================================================
+   TOKENS — konsisten dengan ScanCheckpointPage.css
+========================================================== */
+:root {
+  --bg:            #f1f5f9;
+  --surface:       #ffffff;
+  --surface-alt:   #f8fafc;
+
+  --border:        #e2e8f0;
+  --border-focus:  #dc2626;
+
+  --primary:       #dc2626;
+  --primary-h:     #b91c1c;
+  --primary-bg:    #fef2f2;
+  --primary-light: #fee2e2;
+
+  --success:       #16a34a;
+  --success-bg:    #dcfce7;
+  --success-border:#bbf7d0;
+
+  --warn:          #d97706;
+  --warn-bg:       #fffbeb;
+
+  --danger-bg:     #fef2f2;
+  --danger-border: #fecaca;
+
+  --text:          #0f172a;
+  --text-sub:      #64748b;
+  --text-muted:    #94a3b8;
+
+  --r-card:        14px;
+  --r-input:       10px;
+  --r-btn:         10px;
+
+  --shadow:        0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+  --shadow-sm:     0 1px 2px rgba(0,0,0,.04);
+
+  --font: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ==========================================================
+   PAGE
+========================================================== */
+.qrs-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 24px;
+  font-family: var(--font);
+  color: var(--text);
+}
+
+.qrs-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================
+   TOPBAR
+========================================================== */
+.qrs-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.qrs-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qrs-topbar-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: var(--primary-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qrs-topbar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.qrs-topbar-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.qrs-topbar-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Status chip */
+.qrs-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.qrs-chip--idle     { background: var(--surface-alt); color: var(--text-sub); }
+.qrs-chip--scanning { background: var(--primary-bg);  color: var(--primary); }
+.qrs-chip--done     { background: var(--success-bg);  color: var(--success); }
+.qrs-chip--error    { background: var(--danger-bg);   color: var(--primary); }
+
+.qrs-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.qrs-chip--scanning .qrs-chip-dot {
+  animation: pulse-dot 1s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(1.4); }
+}
+
+/* ==========================================================
+   BODY GRID
+========================================================== */
+.qrs-body {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  align-items: stretch; 
+}
+
+@media (max-width: 1000px) {
+  .qrs-body { grid-template-columns: 1fr 320px; }
+}
+
+@media (max-width: 768px) {
+  .qrs-body { grid-template-columns: 1fr; }
+}
+
+.qrs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+.qrs-col--info .qrs-card:last-child {
+flex: 1;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+.qrs-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.qrs-card--cam {
+  /* Camera card: fixed aspect ratio on desktop, auto on mobile */
+  min-height: 440px;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.qrs-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.qrs-col--cam {
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+.qrs-col--cam .qrs-card--cam { flex: 1; }
+
+/* ==========================================================
+   IDLE STATE
+========================================================== */
+.qrs-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.qrs-idle-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: 20px;
+  background: var(--primary-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.qrs-idle-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.qrs-idle-sub {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin: 0 0 8px;
+  max-width: 300px;
+}
+
+.qrs-btn-start {
+  margin-top: 4px;
+  padding: 12px 28px;
+  font-size: 15px;
+}
+
+/* ==========================================================
+   VIEWFINDER
+========================================================== */
+.qrs-viewfinder {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  background: #0f172a;
+}
+
+.qrs-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay: darkened edges + bright frame */
+.qrs-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  /* Vignette */
+  background:
+    radial-gradient(
+      ellipse 70% 60% at center,
+      transparent 40%,
+      rgba(0,0,0,.45) 100%
+    );
+}
+
+.qrs-frame {
+  position: relative;
+  width: min(260px, 60vw);
+  height: min(260px, 60vw);
+  flex-shrink: 0;
+}
+
+/* Corner brackets */
+.qrs-frame-corner {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.qrs-frame-corner--tl { top: 0; left: 0;  border-width: 3px 0 0 3px; border-radius: 4px 0 0 0; }
+.qrs-frame-corner--tr { top: 0; right: 0; border-width: 3px 3px 0 0; border-radius: 0 4px 0 0; }
+.qrs-frame-corner--bl { bottom: 0; left: 0;  border-width: 0 0 3px 3px; border-radius: 0 0 0 4px; }
+.qrs-frame-corner--br { bottom: 0; right: 0; border-width: 0 3px 3px 0; border-radius: 0 0 4px 0; }
+
+/* Animated scan line */
+.qrs-scan-line {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dc2626, transparent);
+  border-radius: 2px;
+  animation: scan-move 2s ease-in-out infinite;
+}
+
+@keyframes scan-move {
+  0%   { top: 6px;  opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: calc(100% - 8px); opacity: 0; }
+}
+
+.qrs-overlay-hint {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(4px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-align: center;
+}
+
+/* Cam controls */
+.qrs-cam-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: all;
+}
+
+.qrs-ctrl-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15,23,42,.6);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+
+.qrs-ctrl-btn:hover { background: rgba(15,23,42,.85); }
+.qrs-ctrl-btn:active { transform: scale(.92); }
+
+.qrs-ctrl-btn.active {
+  background: var(--primary);
+}
+
+.qrs-ctrl-btn--stop {
+  background: rgba(220,38,38,.6);
+}
+
+.qrs-ctrl-btn--stop:hover { background: rgba(185,28,28,.9); }
+
+/* ==========================================================
+   FOUND STATE
+========================================================== */
+.qrs-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+  padding: 36px 24px;
+  text-align: center;
+}
+
+.qrs-found-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  border: 2px solid var(--success-border);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop-in .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes pop-in {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.qrs-found-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.qrs-found-token {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 18px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.qrs-found-token-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.qrs-found-token-val {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 13px;
+  color: var(--text);
+  word-break: break-all;
+  text-align: left;
+}
+
+.qrs-found-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ==========================================================
+   ERROR STATE
+========================================================== */
+.qrs-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.qrs-error-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--danger-bg);
+  border: 1.5px solid var(--danger-border);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrs-error-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.qrs-error-msg {
+  font-size: 13px;
+  color: var(--text-sub);
+  max-width: 340px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ==========================================================
+   STEPS (cara scan)
+========================================================== */
+.qrs-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.qrs-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.qrs-step:last-child { border-bottom: none; }
+
+.qrs-step-num {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.qrs-step-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+
+.qrs-step-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ==========================================================
+   TIPS
+========================================================== */
+.qrs-tips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.qrs-tip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.qrs-tip:last-child { border-bottom: none; }
+
+.qrs-tip-icon {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qrs-tip-icon--ok {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.qrs-tip-icon--warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+/* ==========================================================
+   MANUAL INPUT
+========================================================== */
+.qrs-manual {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qrs-manual-hint {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.qrs-manual-input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-input);
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.qrs-manual-input::placeholder { color: var(--text-muted); }
+
+.qrs-manual-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.1);
+}
+
+.qrs-manual-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+.qrs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 42px;
+  padding: 0 20px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-btn);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+  white-space: nowrap;
+}
+
+.qrs-btn-primary:hover:not(:disabled) { background: var(--primary-h); }
+.qrs-btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+.qrs-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 42px;
+  padding: 0 16px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-btn);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+
+.qrs-btn-ghost:hover { background: var(--surface-alt); border-color: #cbd5e1; }
+
+.qrs-btn-block {
+  width: 100%;
+}
+
+.qrs-col--info .qrs-card:last-child {
+  flex: 1;
+}
+
+/* html5-qrcode container */
+.qrs-h5scanner {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.qrs-h5scanner video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.qrs-h5scanner > div {
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* ==========================================================
+   UPLOAD QR IMAGE  — tambahkan ke QRScannerPage.css
+========================================================== */
+
+.qrs-upload-qr {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qrs-upload-qr-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.qrs-upload-qr-hint {
+  font-size: 12.5px;
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.qrs-btn-upload {
+  margin-top: 2px;
+  border-style: dashed;
+}
+
+/* ── Status feedback ── */
+.qrs-upload-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.qrs-upload-status--loading {
+  background: var(--primary-bg);
+  color: var(--primary);
+  border: 1px solid var(--primary-light);
+}
+
+.qrs-upload-status--success {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+}
+
+.qrs-upload-status--error {
+  background: var(--danger-bg);
+  color: var(--primary);
+  border: 1px solid var(--danger-border);
+}
+
+/* Spinner */
+.qrs-upload-spinner {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: qrs-spin .7s linear infinite;
+}
+
+@keyframes qrs-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Inline link & retry button */
+.qrs-upload-link {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.qrs-upload-retry {
+  margin-left: auto;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font);
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+
+.qrs-upload-retry:hover { opacity: .75; }
+
+/* Mobile tweak */
+@media (max-width: 768px) {
+  .qrs-upload-qr { max-width: 100%; }
+}
+
+/* ==========================================================
+   UPLOAD QR IMAGE  — tambahkan ke QRScannerPage.css
+========================================================== */
+
+.qrs-upload-qr {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface-alt);
+  border: 1.5px dashed var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qrs-upload-qr-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.qrs-upload-qr-hint {
+  font-size: 12.5px;
+  color: var(--text-sub);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.qrs-btn-upload {
+  margin-top: 2px;
+  border-style: dashed;
+}
+
+/* ── Status feedback ── */
+.qrs-upload-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.qrs-upload-status--loading {
+  background: var(--primary-bg);
+  color: var(--primary);
+  border: 1px solid var(--primary-light);
+}
+
+.qrs-upload-status--success {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid var(--success-border);
+}
+
+.qrs-upload-status--error {
+  background: var(--danger-bg);
+  color: var(--primary);
+  border: 1px solid var(--danger-border);
+}
+
+/* Spinner */
+.qrs-upload-spinner {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: qrs-spin .7s linear infinite;
+}
+
+@keyframes qrs-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Inline link & retry button */
+.qrs-upload-link {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.qrs-upload-retry {
+  margin-left: auto;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font);
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+
+.qrs-upload-retry:hover { opacity: .75; }
+
+/* Mobile tweak */
+@media (max-width: 768px) {
+  .qrs-upload-qr { max-width: 100%; }
+}
+
+/* ==========================================================
+   IDLE — 2 action buttons
+========================================================== */
+.qrs-idle-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.qrs-btn-upload-idle {
+  padding: 0 20px;
+  font-size: 15px;
+  height: 46px;
+}
+
+/* Decode error banner */
+.qrs-upload-decode-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: 340px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Spinner (reused from upload section) */
+.qrs-upload-spinner {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: qrs-spin .7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes qrs-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .qrs-idle-actions { flex-direction: column; width: 100%; }
+  .qrs-idle-actions .qrs-btn-primary,
+  .qrs-idle-actions .qrs-btn-ghost { width: 100%; }
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+@media (max-width: 768px) {
+  .qrs-page { padding: 12px 14px; }
+
+  .qrs-topbar-sub { display: none; }
+  .qrs-topbar-title { font-size: 16px; }
+
+  .qrs-card--cam { min-height: 320px; }
+
+  .qrs-found-actions { flex-direction: column; width: 100%; }
+  .qrs-found-actions .qrs-btn-primary,
+  .qrs-found-actions .qrs-btn-ghost { width: 100%; }
+
+  .qrs-manual-actions { flex-direction: column; }
+  .qrs-manual-actions .qrs-btn-primary,
+  .qrs-manual-actions .qrs-btn-ghost { width: 100%; }
+}
+

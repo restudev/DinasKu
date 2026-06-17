@@ -1,0 +1,857 @@
+/* ==========================================================
+   DocumentDetailPage.css
+   Tema: selaras dengan Homepage DinasKu
+   Warna utama: #B71C1C / #D32F2F (merah), #212121 (teks gelap)
+   Font: Inter (body), sistem monospace (kode/ID)
+========================================================== */
+
+/* ── Tokens ── */
+:root {
+  --dd-red:        #B71C1C;
+  --dd-red-mid:    #D32F2F;
+  --dd-red-light:  #FFEBEE;
+  --dd-red-pill:   rgba(183, 28, 28, 0.08);
+
+  --dd-green:      #2E7D32;
+  --dd-green-bg:   #E8F5E9;
+  --dd-green-bdr:  #A5D6A7;
+
+  --dd-amber:      #B45309;
+  --dd-amber-bg:   #FEF3C7;
+
+  --dd-blue:       #1565C0;
+  --dd-blue-bg:    #E3F2FD;
+
+  --dd-ink:        #212121;
+  --dd-sub:        #616161;
+  --dd-muted:      #9E9E9E;
+
+  --dd-surface:    #FFFFFF;
+  --dd-bg:         #F5F5F5;
+  --dd-border:     #E0E0E0;
+  --dd-border-soft:#EEEEEE;
+
+  --dd-shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --dd-shadow:     0 2px 8px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
+  --dd-shadow-md:  0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+
+  --dd-radius:     14px;
+  --dd-radius-sm:  10px;
+  --dd-radius-xs:  6px;
+  --dd-font:       "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+.dd-page {
+  min-height: 100vh;
+  background: var(--dd-bg);
+  font-family: var(--dd-font);
+  color: var(--dd-ink);
+  padding: 24px 20px 60px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.dd-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Loading / Error ── */
+.dd-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 14px;
+  color: var(--dd-sub);
+  font-size: 14px;
+}
+
+.dd-center-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dd-center-icon--loading {
+  background: var(--dd-red-light);
+  color: var(--dd-red);
+}
+
+.dd-center-icon--error {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.dd-spin {
+  animation: dd-spin 1s linear infinite;
+}
+
+@keyframes dd-spin { to { transform: rotate(360deg); } }
+
+/* ── Back link ── */
+.dd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dd-sub);
+  text-decoration: none;
+  padding: 6px 0;
+  width: fit-content;
+  transition: color .15s;
+}
+
+.dd-back:hover { color: var(--dd-red); }
+
+/* ── Header card (ticket / letterhead) ── */
+.dd-header {
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  box-shadow: var(--dd-shadow);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper that owns the perforation + notches, sits between banner and infobar */
+.dd-header-tear {
+  position: relative;
+  height: 0;
+}
+
+/* Ticket notches: semicircular "punch holes" cut into the left/right edges */
+.dd-header-tear::before,
+.dd-header-tear::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--dd-bg);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--dd-border);
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.dd-header-tear::before { left: -12px; }
+.dd-header-tear::after  { right: -12px; }
+
+/* Zigzag perforation line */
+.dd-header-perforation {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: -6px;
+  height: 12px;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(135deg, transparent calc(50% - 1px), var(--dd-border) calc(50% - 1px), var(--dd-border) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(45deg, transparent calc(50% - 1px), var(--dd-border) calc(50% - 1px), var(--dd-border) calc(50% + 1px), transparent calc(50% + 1px));
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 0;
+  background-repeat: repeat-x;
+}
+
+/* Red gradient banner */
+.dd-header-banner {
+  background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 50%, #8B0000 100%);
+  padding: 24px 28px 26px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dd-header-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.dd-header-banner-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+
+.dd-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.dd-doc-id {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ── Status chip ── */
+.dd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--dd-surface);
+}
+
+.dd-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.dd-chip--done     { color: var(--dd-green); }
+.dd-chip--progress { color: var(--dd-amber); }
+.dd-chip--uploaded { color: var(--dd-blue); }
+.dd-chip--idle     { color: var(--dd-muted); }
+
+/* ── Route strip (inside banner) ── */
+.dd-route {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  position: relative;
+}
+
+.dd-route-place {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dd-route-place--end {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.dd-route-label {
+  font-size: 11px;
+  color: rgba(255,255,255,.75);
+  font-weight: 500;
+}
+
+.dd-route-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.dd-route-line {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  color: rgba(255,255,255,.5);
+  min-width: 60px;
+  position: relative;
+}
+
+.dd-route-track {
+  flex: 1;
+  height: 0;
+  border-top: 2px dotted rgba(255,255,255,.45);
+}
+
+/* Plane icon badge centered on the route line */
+.dd-route-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--dd-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+/* ── Info bar (below banner): pegawai, berangkat, kembali, dokumen ── */
+.dd-infobar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.dd-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-right: 1px solid var(--dd-border-soft);
+}
+
+.dd-info-item:last-child { border-right: none; }
+
+.dd-info-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--dd-red-light);
+  color: var(--dd-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dd-info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dd-info-label {
+  font-size: 12px;
+  color: var(--dd-muted);
+  font-weight: 500;
+}
+
+.dd-info-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dd-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-info-sub {
+  font-size: 12px;
+  color: var(--dd-muted);
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+
+.dd-info-link {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dd-red);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dd-info-link:hover { text-decoration: underline; }
+
+/* ── Section ── */
+.dd-section {
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-border);
+  border-radius: var(--dd-radius);
+  box-shadow: var(--dd-shadow);
+  overflow: hidden;
+}
+
+.dd-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  flex-wrap: wrap;
+}
+
+.dd-section-head > div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dd-section-head > *:last-child {
+  flex: 1 1 140px;
+}
+
+.dd-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dd-ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.dd-section-sub {
+  font-size: 12.5px;
+  color: var(--dd-muted);
+  margin: 4px 0 0;
+}
+
+/* ── Progress bar ── */
+.dd-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  flex: 1 1 140px;
+  min-width: 140px;
+}
+
+.dd-progress-track {
+  width: 100%;
+  max-width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--dd-border);
+  overflow: hidden;
+}
+
+.dd-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #B71C1C, #D32F2F);
+  border-radius: 999px;
+  transition: width .5s ease;
+}
+
+.dd-progress-label {
+  font-size: 11.5px;
+  color: var(--dd-muted);
+  font-weight: 500;
+  text-align: right;
+}
+
+/* ── Itinerary list (full-width rows) ── */
+.dd-itinerary {
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-stop {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.dd-stop-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dd-stop-marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid;
+  margin-top: 18px;
+  transition: transform .15s;
+}
+
+.dd-stop-marker--done {
+  background: linear-gradient(135deg, #B71C1C, #D32F2F);
+  border-color: #B71C1C;
+  color: #fff;
+}
+
+.dd-stop-marker--pending {
+  background: var(--dd-surface);
+  border-color: var(--dd-border);
+  color: var(--dd-muted);
+}
+
+.dd-stop-connector {
+  width: 0;
+  flex: 1;
+  min-height: 24px;
+  margin: 4px 0;
+  border-left: 2px dashed var(--dd-border);
+}
+
+.dd-stop:last-child .dd-stop-connector { display: none; }
+
+/* ── Stop row ── */
+.dd-stop-card {
+  display: grid;
+  grid-template-columns: minmax(0,1.6fr) minmax(0,1.2fr) auto auto;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: var(--dd-ink);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--dd-border-soft);
+  transition: background-color .15s;
+}
+
+.dd-stop:last-child .dd-stop-card { border-bottom: none; }
+
+.dd-stop-card:hover {
+  background-color: var(--dd-red-light);
+}
+
+.dd-stop-card:focus-visible {
+  outline: 2px solid var(--dd-red);
+  outline-offset: -2px;
+}
+
+.dd-stop-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dd-stop-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--dd-red-light);
+  color: var(--dd-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dd-stop-info {
+  min-width: 0;
+}
+
+.dd-stop-location {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: var(--dd-ink);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-stop-arrow { color: var(--dd-muted); font-weight: 400; font-size: 13px; }
+
+.dd-stop-desc {
+  font-size: 12.5px;
+  color: var(--dd-muted);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-stop-place {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--dd-ink);
+  font-weight: 500;
+  min-width: 0;
+}
+
+.dd-stop-place svg {
+  flex-shrink: 0;
+  color: var(--dd-muted);
+}
+
+.dd-stop-place span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dd-stop-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--dd-muted);
+  font-family: "SF Mono", "Fira Code", monospace;
+  white-space: nowrap;
+}
+
+.dd-stop-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-align: center;
+  border: 1px solid;
+}
+
+.dd-stop-status--done {
+  background: var(--dd-green-bg);
+  color: var(--dd-green);
+  border-color: var(--dd-green-bdr);
+}
+
+.dd-stop-status--pending {
+  background: var(--dd-surface);
+  color: var(--dd-muted);
+  border-color: var(--dd-border);
+}
+
+/* ── Empty state ── */
+.dd-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--dd-muted);
+  font-size: 13.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.dd-empty-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dd-muted);
+}
+
+/* ── Buttons ── */
+.dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--dd-radius-xs);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--dd-font);
+  white-space: nowrap;
+  transition: all .15s;
+}
+
+.dd-btn--primary {
+  background: linear-gradient(135deg, #B71C1C, #D32F2F);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(183,28,28,.25);
+}
+
+.dd-btn--primary:hover {
+  box-shadow: 0 4px 14px rgba(183,28,28,.35);
+  transform: translateY(-1px);
+}
+
+.dd-btn--ghost {
+  border: 1px solid var(--dd-border);
+  color: var(--dd-ink);
+  background: var(--dd-surface);
+}
+
+.dd-btn--ghost:hover {
+  border-color: var(--dd-red);
+  color: var(--dd-red);
+  background: var(--dd-red-light);
+}
+
+/* ── PDF Preview section ── */
+.dd-pdf-wrap {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dd-pdf-wrap iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  display: block;
+  border-radius: 0 0 var(--dd-radius) var(--dd-radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .dd-infobar { grid-template-columns: repeat(2, 1fr); }
+  .dd-info-item:nth-child(2) { border-right: none; }
+  .dd-info-item:nth-child(3),
+  .dd-info-item:nth-child(4) { border-top: 1px solid var(--dd-border-soft); }
+
+  .dd-stop-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: start;
+    padding: 16px 0;
+  }
+  .dd-stop-place,
+  .dd-stop-time,
+  .dd-stop-status {
+    justify-self: start;
+  }
+  .dd-route-name { max-width: 160px; }
+}
+
+@media (max-width: 720px) {
+  .dd-pdf-wrap { height: 460px; min-height: 0; }
+  .dd-header-banner { padding: 20px 18px 22px; }
+  .dd-section-head { padding: 16px 18px; }
+  .dd-stop { padding: 0 18px; }
+}
+
+@media (max-width: 480px) {
+  .dd-page { padding: 14px 12px 48px; }
+
+  /* ── Banner ── */
+  .dd-doc-id { font-size: 20px; }
+  .dd-header-banner { padding: 18px 16px 20px; }
+  .dd-header-banner-top { flex-direction: row; align-items: center; gap: 10px; }
+
+  /* Route: keep horizontal, hide the dotted line, show arrow instead */
+  .dd-route { flex-direction: row; align-items: center; gap: 8px; margin-top: 16px; }
+  .dd-route-line { display: none; }
+  .dd-route-place { gap: 1px; }
+  .dd-route-place--end { align-items: flex-start; text-align: left; }
+  .dd-route-name { font-size: 15px; max-width: 120px; }
+
+  /* Arrow between asal & tujuan */
+  .dd-route::after {
+    content: '→';
+    color: rgba(255,255,255,.6);
+    font-size: 16px;
+    flex-shrink: 0;
+    order: 2;
+  }
+  .dd-route-place:first-child { order: 1; }
+  .dd-route-place--end { order: 3; }
+
+  /* ── Info bar: 2 columns ── */
+  .dd-infobar { grid-template-columns: repeat(2, 1fr); }
+  .dd-info-item {
+    padding: 12px 14px;
+    gap: 10px;
+    border-right: 1px solid var(--dd-border-soft);
+    border-top: 1px solid var(--dd-border-soft);
+  }
+  /* Reset override from 900px rule */
+  .dd-info-item:nth-child(2) { border-right: 1px solid var(--dd-border-soft); }
+  .dd-info-item:nth-child(3),
+  .dd-info-item:nth-child(4) { border-top: 1px solid var(--dd-border-soft); }
+  /* Remove right border on 2nd column */
+  .dd-info-item:nth-child(2n) { border-right: none; }
+  /* Remove top border on first row */
+  .dd-info-item:nth-child(1),
+  .dd-info-item:nth-child(2) { border-top: none; }
+
+  .dd-info-icon { width: 32px; height: 32px; flex-shrink: 0; }
+  .dd-info-val { font-size: 13px; white-space: normal; }
+  .dd-info-sub { font-size: 11px; }
+  .dd-info-label { font-size: 11px; }
+
+  /* ── Checkpoint stop ── */
+  .dd-stop { grid-template-columns: 24px 1fr; gap: 10px; padding: 0 14px; }
+  .dd-stop-marker { width: 24px; height: 24px; font-size: 10px; margin-top: 14px; }
+
+  /* Stop card: susun ulang jadi 3 baris menggunakan display:contents
+   * sehingga icon, info, status, place, time langsung jadi grid item.
+   * Grid: [icon 32px] [info 1fr] [status auto]
+   * Row 1: icon | nama + deskripsi | status
+   * Row 2: (kosong) | lokasi       | waktu
+   */
+  .dd-stop-card {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 14px 0 18px;
+  }
+  /* dd-stop-main menjadi display:contents agar anak-anaknya masuk grid */
+  .dd-stop-main { display: contents; }
+
+  .dd-stop-icon {
+    grid-column: 1; grid-row: 1;
+    width: 32px; height: 32px;
+    align-self: center;
+  }
+  .dd-stop-info {
+    grid-column: 2; grid-row: 1;
+    min-width: 0;
+  }
+  .dd-stop-location { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dd-stop-desc {
+    font-size: 11px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+
+  .dd-stop-status {
+    grid-column: 3; grid-row: 1;
+    align-self: center;
+    font-size: 11px;
+    padding: 4px 9px;
+  }
+  .dd-stop-place {
+    grid-column: 2; grid-row: 2;
+    font-size: 12px;
+  }
+  .dd-stop-time {
+    grid-column: 3; grid-row: 2;
+    font-size: 11px;
+    justify-self: end;
+  }
+
+  /* Section head compact */
+  .dd-section-head { padding: 14px 16px; gap: 10px; }
+  .dd-section-title { font-size: 16px; }
+  .dd-progress { flex: 0 0 auto; min-width: 100px; }
+
+  /* Ticket notches */
+  .dd-header-tear::before,
+  .dd-header-tear::after { width: 18px; height: 18px; }
+  .dd-header-tear::before { left: -9px; }
+  .dd-header-tear::after  { right: -9px; }
+  .dd-header-perforation {
+    left: 16px; right: 16px; top: -5px;
+    height: 10px;
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 0;
+  }
+}

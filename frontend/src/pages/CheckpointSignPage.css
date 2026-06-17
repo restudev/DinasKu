@@ -1,0 +1,498 @@
+/* ==========================================================
+   TOKENS — sama dengan ScanCheckpointPage
+========================================================== */
+:root {
+  --bg:           #f1f5f9;
+  --surface:      #ffffff;
+  --surface-alt:  #f8fafc;
+
+  --border:       #e2e8f0;
+
+  --primary:      #dc2626;
+  --primary-h:    #b91c1c;
+  --primary-bg:   #fef2f2;
+
+  --success:      #16a34a;
+  --success-bg:   #dcfce7;
+  --success-border:#bbf7d0;
+
+  --text:         #0f172a;
+  --text-sub:     #64748b;
+  --text-muted:   #94a3b8;
+
+  --r-card:       14px;
+  --r-btn:        10px;
+  --r-input:      10px;
+
+  --shadow:       0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.05);
+  --shadow-sm:    0 1px 2px rgba(0,0,0,.04);
+
+  --font: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { width: 100%; height: 100%; margin: 0; }
+
+/* ==========================================================
+   PAGE
+========================================================== */
+.csp-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 24px;
+  font-family: var(--font);
+  color: var(--text);
+}
+
+.csp-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.csp-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-sub);
+  font-size: 15px;
+  font-family: var(--font);
+}
+
+/* ==========================================================
+   TOPBAR
+========================================================== */
+.csp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.csp-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.csp-topbar-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: var(--primary-bg);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csp-topbar-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.csp-topbar-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  text-align: left;
+}
+
+.csp-topbar-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin: 0;
+  text-align: left;
+}
+
+/* Status chip */
+.csp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.csp-chip--pending {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.csp-chip--done {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.csp-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+.csp-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 16px;
+  align-items: start;
+}
+
+.csp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.csp-col--right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .csp-cols { grid-template-columns: minmax(0,1fr) 380px; }
+}
+@media (max-width: 900px) {
+  .csp-cols { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+.csp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.csp-card--success {
+  border-color: var(--success-border);
+  background: var(--success-bg);
+}
+
+.csp-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* ==========================================================
+   META
+========================================================== */
+.csp-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.csp-meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.csp-meta-item:last-child { border-bottom: none; }
+
+.csp-meta-key {
+  font-size: 14px;
+  color: var(--text-sub);
+  flex-shrink: 0;
+}
+
+.csp-meta-val {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--text);
+}
+
+.csp-meta-mono {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   FOTO
+========================================================== */
+.csp-photo-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #0f172a;
+}
+
+.csp-photo {
+  width: 100%;
+  display: block;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/* ==========================================================
+   SUCCESS CARD
+========================================================== */
+.csp-success-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.csp-success-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csp-success-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.csp-success-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.csp-btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: var(--success);
+  color: #fff;
+  border-radius: var(--r-btn);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  text-decoration: none;
+  transition: background .15s;
+}
+
+.csp-btn-pdf:hover { background: #15803d; }
+
+/* ==========================================================
+   SIGNATURE
+========================================================== */
+.csp-sig-wrap {
+  position: relative;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+.csp-sig-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ==========================================================
+   UPLOAD AREA
+========================================================== */
+.csp-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px 20px;
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  background: var(--surface-alt);
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  color: var(--text-sub);
+}
+
+.csp-upload:hover {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+
+.csp-upload-input {
+  display: none;
+}
+
+.csp-upload-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: inherit;
+}
+
+.csp-upload-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   STAMP PREVIEW
+========================================================== */
+.csp-stamp-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.csp-stamp-img {
+  max-width: 180px;
+  max-height: 180px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  object-fit: contain;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+.csp-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-btn);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+
+.csp-btn-ghost:hover {
+  background: var(--surface-alt);
+  border-color: #cbd5e1;
+}
+
+.csp-btn-submit {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-btn);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+
+.csp-btn-submit:hover:not(:disabled) { background: var(--primary-h); }
+.csp-btn-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ==========================================================
+   SPINNER
+========================================================== */
+.csp-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(220,38,38,.25);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: csp-spin .7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.csp-spinner--sm {
+  width: 15px;
+  height: 15px;
+  border-color: rgba(255,255,255,.35);
+  border-top-color: #fff;
+}
+
+@keyframes csp-spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================
+   SIGNATURE TABS
+========================================================== */
+.csp-sig-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.csp-sig-tab {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-btn);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.csp-sig-tab--active {
+  background: var(--primary-bg);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+@media (max-width: 768px) {
+  .csp-page { padding: 12px 14px; }
+  .csp-topbar-sub { display: none; }
+  .csp-btn-submit { height: 52px; font-size: 16px; }
+}

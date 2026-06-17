@@ -1,0 +1,324 @@
+/* ==========================================================
+   CheckpointDetailPage.css
+   Tema: selaras dengan DocumentDetailPage / Homepage DinasKu
+   Warna utama: #B71C1C / #D32F2F (merah), #212121 (teks gelap)
+   Font: Inter (body), sistem monospace (kode/ID)
+========================================================== */
+
+/* ── Tokens ── */
+:root {
+  --cd-red:        #B71C1C;
+  --cd-red-mid:    #D32F2F;
+  --cd-red-light:  #FFEBEE;
+  --cd-red-pill:   rgba(183, 28, 28, 0.08);
+
+  --cd-green:      #2E7D32;
+  --cd-green-bg:   #E8F5E9;
+  --cd-green-bdr:  #A5D6A7;
+
+  --cd-amber:      #B45309;
+  --cd-amber-bg:   #FEF3C7;
+
+  --cd-blue:       #1565C0;
+  --cd-blue-bg:    #E3F2FD;
+
+  --cd-ink:        #212121;
+  --cd-sub:        #616161;
+  --cd-muted:      #9E9E9E;
+
+  --cd-surface:    #FFFFFF;
+  --cd-bg:         #F5F5F5;
+  --cd-border:     #E0E0E0;
+  --cd-border-soft:#EEEEEE;
+
+  --cd-shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --cd-shadow:     0 2px 8px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
+  --cd-shadow-md:  0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+
+  --cd-radius:     14px;
+  --cd-radius-sm:  10px;
+  --cd-radius-xs:  6px;
+  --cd-font:       "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+.cd-page {
+  min-height: 100vh;
+  background: var(--cd-bg);
+  font-family: var(--cd-font);
+  color: var(--cd-ink);
+  padding: 24px 20px 60px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cd-shell {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Loading / Empty ── */
+.cd-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 14px;
+  color: var(--cd-sub);
+  font-size: 14px;
+}
+
+.cd-center-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cd-center-icon--loading {
+  background: var(--cd-red-light);
+  color: var(--cd-red);
+}
+
+.cd-center-icon--error {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.cd-spin {
+  animation: cd-spin 1s linear infinite;
+}
+
+@keyframes cd-spin { to { transform: rotate(360deg); } }
+
+/* ── Back link ── */
+.cd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cd-sub);
+  text-decoration: none;
+  padding: 6px 0;
+  width: fit-content;
+  transition: color .15s;
+}
+
+.cd-back:hover { color: var(--cd-red); }
+
+.cd-back::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2.2px solid currentColor;
+  border-right: none;
+  border-top: none;
+  transform: rotate(45deg);
+  margin-right: 2px;
+}
+
+/* ── Header card (letterhead) ── */
+.cd-header {
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-radius: var(--cd-radius);
+  box-shadow: var(--cd-shadow);
+  overflow: hidden;
+}
+
+/* Red gradient banner */
+.cd-header-banner {
+  background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 50%, #8B0000 100%);
+  padding: 24px 28px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cd-header-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.cd-header-banner-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+
+.cd-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.cd-doc-id {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Title inside banner (replaces plain <h1>) */
+.cd-header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+/* ── Status chip ── */
+.cd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+
+.cd-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.cd-chip--done     { background: var(--cd-green-bg); color: var(--cd-green); }
+.cd-chip--progress { background: var(--cd-amber-bg); color: var(--cd-amber); }
+.cd-chip--uploaded { background: var(--cd-blue-bg);  color: var(--cd-blue); }
+.cd-chip--idle     { background: #F5F5F5;             color: var(--cd-muted); }
+
+/* ── Content layout ── */
+.cd-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section ── */
+.cd-section {
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-radius: var(--cd-radius);
+  box-shadow: var(--cd-shadow);
+  overflow: hidden;
+}
+
+.cd-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cd-ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--cd-border-soft);
+}
+
+/* ── Info table ── */
+.cd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.cd-table tbody tr {
+  border-bottom: 1px solid var(--cd-border-soft);
+}
+
+.cd-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.cd-table td {
+  padding: 14px 24px;
+  vertical-align: middle;
+}
+
+.cd-table td:first-child {
+  width: 38%;
+  color: var(--cd-muted);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.cd-table td:first-child b {
+  font-weight: 600;
+  color: var(--cd-muted);
+}
+
+.cd-table td:last-child {
+  color: var(--cd-ink);
+  font-weight: 600;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12.5px;
+  word-break: break-all;
+}
+
+/* ── QR Container ── */
+.cd-qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: var(--cd-bg);
+}
+
+.cd-qr-container img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  background: var(--cd-surface);
+  border: 1px solid var(--cd-border);
+  border-radius: var(--cd-radius-sm);
+  padding: 16px;
+  box-shadow: var(--cd-shadow-sm);
+}
+
+.cd-qr-container p {
+  margin: 0;
+  color: var(--cd-muted);
+  font-size: 13.5px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+  .cd-header-banner { padding: 20px 18px 18px; }
+  .cd-header h1 { font-size: 18px; }
+  .cd-section-title { padding: 14px 16px; }
+  .cd-table td { padding: 12px 16px; }
+}
+
+@media (max-width: 480px) {
+  .cd-page { padding: 14px 12px 48px; }
+  .cd-header-banner-top { flex-direction: column; gap: 10px; }
+  .cd-qr-container img { width: 180px; height: 180px; }
+}
